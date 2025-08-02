@@ -4,7 +4,8 @@
       "Bash(python -m pytest test/ -v)",
       "Bash(python3 -m pytest test/ -v)",
       "Bash(python3:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": []
   }
