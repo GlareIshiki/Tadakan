@@ -1,0 +1,44 @@
+# 仮想環境
+venv/
+ENV/
+env/
+.venv/
+
+# Pythonキャッシュ
+__pycache__/
+*.py[cod]
+*$py.class
+
+# VSCode, PyCharm等のエディタ
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OSゴミ
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ログ・設定ファイル
+*.log
+*.sqlite3
+*.db
+*.bak
+
+# テスト結果
+htmlcov/
+.coverage
+.tox/
+.nox/
+.cache/
+.pytest_cache/
+
+# ユーザープリセットや一時フォルダ（運用決まったら追加）
+presets/*.json
+presets/*.bak
+
+# その他
+*.swp
+*.tmp
+*.orig
