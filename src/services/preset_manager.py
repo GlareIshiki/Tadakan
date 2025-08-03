@@ -1,12 +1,14 @@
 import os
 import json
 from typing import List, Dict, Any, Optional
-from models.preset import Preset
+from src.models.preset import Preset
+from src.utils.id_generator import PresetIDGenerator
 
 
 class PresetManager:
     def __init__(self, presets_directory: str = "presets"):
         self.presets_directory = presets_directory
+        self.id_generator = PresetIDGenerator()
         self._ensure_directory_exists()
     
     def _ensure_directory_exists(self):
@@ -120,3 +122,34 @@ class PresetManager:
             return self.load_preset(file_path)
         
         return None
+    
+    def create_preset_with_id(self, preset_data: Dict[str, Any]) -> Preset:
+        """プリセットIDを自動生成してプリセットを作成"""
+        # 既存IDを収集
+        existing_ids = set()
+        for preset in self.list_presets():
+            if preset.id:
+                existing_ids.add(preset.id)
+        
+        # 一意のIDを生成
+        new_id = self.id_generator.generate_unique(existing_ids)
+        
+        # プリセット作成
+        preset = Preset(
+            name=preset_data["name"],
+            fields=preset_data["fields"],
+            naming_pattern=preset_data["naming_pattern"],
+            default_values=preset_data.get("default_values", {}),
+            target_extensions=preset_data.get("target_extensions"),
+            id=new_id
+        )
+        
+        return preset
+    
+    def create_preset(self, preset_data: Dict[str, Any]) -> Preset:
+        """プリセットを作成（辞書形式から）"""
+        return self.create_preset_with_id(preset_data)
+    
+    def load_preset(self, name: str) -> Optional[Preset]:
+        """プリセット名でプリセットを読み込み"""
+        return self.get_preset_by_name(name)

@@ -35,7 +35,7 @@
 ## インストール
 
 ```bash
-git clone https://github.com/（ユーザー名）/tadakan.git
+git clone https://github.com/GlareIshiki/Tadakan.git
 cd tadakan
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
