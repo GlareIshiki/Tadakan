@@ -71,7 +71,6 @@ class BatchGenerator:
             lines.append(f'echo 完了時刻: %date% %time% >> "{log_file}"')
         
         lines.append("echo 処理が完了しました。")
-        lines.append("pause")
         
         return "\n".join(lines)
     
@@ -106,7 +105,6 @@ class BatchGenerator:
         
         lines.append("")
         lines.append("echo フィルタリングが完了しました。")
-        lines.append("pause")
         
         return "\n".join(lines)
     
@@ -128,7 +126,6 @@ class BatchGenerator:
         
         lines.append("")
         lines.append("echo 復元が完了しました。")
-        lines.append("pause")
         
         return "\n".join(lines)
     
@@ -149,7 +146,6 @@ class BatchGenerator:
         
         lines.append("")
         lines.append("echo アンドゥが完了しました。")
-        lines.append("pause")
         
         return "\n".join(lines)
     

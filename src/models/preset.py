@@ -24,12 +24,12 @@ class Preset:
         
         # ID生成
         if auto_generate_id and not id:
-            from src.utils.id_generator import PresetIDGenerator
+            from utils.id_generator import PresetIDGenerator
             generator = PresetIDGenerator()
             self.id = generator.generate()
         elif not id and not auto_generate_id:
             # IDが指定されておらず、auto_generate_idもFalseの場合はデフォルトで生成
-            from src.utils.id_generator import PresetIDGenerator
+            from utils.id_generator import PresetIDGenerator
             generator = PresetIDGenerator()
             self.id = generator.generate()
         else:

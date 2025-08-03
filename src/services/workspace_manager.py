@@ -11,7 +11,7 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 from dataclasses import dataclass
 
-from src.models.workspace import Workspace, ValidationResult, InitializationResult
+from models.workspace import Workspace, ValidationResult, InitializationResult
 
 
 @dataclass

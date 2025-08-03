@@ -52,7 +52,7 @@ class BatchFile:
             ])
         
         content_lines.extend([
-            "pause",
+            "echo ファイル処理が完了しました。",
             "endlocal"
         ])
         

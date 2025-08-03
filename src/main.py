@@ -11,14 +11,14 @@ import argparse
 from pathlib import Path
 
 # プロジェクトルートをPythonパスに追加
-project_root = Path(__file__).parent
+project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from services.preset_manager import PresetManager
-from services.file_renamer import FileRenamer
-from services.batch_generator import BatchGenerator
-from models.preset import Preset
-from models.file_item import FileItem
+from src.services.preset_manager import PresetManager
+from src.services.file_renamer import FileRenamer
+from src.services.batch_generator import BatchGenerator
+from src.models.preset import Preset
+from src.models.file_item import FileItem
 
 
 class TadakanCLI:
@@ -139,6 +139,12 @@ def main():
   # デモ実行
   python src/main.py --demo
 
+  # GUIインターフェース起動
+  python src/main.py --gui
+
+  # ワークスペース指定でGUI起動
+  python src/main.py --gui --workspace "C:/MyWorkspace"
+
   # バッチファイル生成
   python src/main.py --preset "プリセット名" --values "フィールド1=値1,フィールド2=値2" --files file1.jpg file2.png --output ./renamed/
         """
@@ -146,6 +152,8 @@ def main():
     
     parser.add_argument('--list', action='store_true', help='プリセット一覧表示')
     parser.add_argument('--demo', action='store_true', help='デモを実行')
+    parser.add_argument('--gui', action='store_true', help='GUIインターフェースを起動')
+    parser.add_argument('--workspace', type=str, help='ワークスペースディレクトリを指定')
     parser.add_argument('--preset', type=str, help='使用するプリセット名')
     parser.add_argument('--values', type=str, help='フィールド値 (例: "カテゴリ=写真,タイトル=テスト")')
     parser.add_argument('--files', nargs='+', help='対象ファイルリスト')
@@ -158,6 +166,32 @@ def main():
     # プリセット一覧表示
     if args.list:
         cli.list_presets()
+        return
+    
+    # GUI起動
+    if args.gui:
+        try:
+            # 既にプロジェクトルートは追加済み
+            
+            # GUIモジュールをインポート
+            from src.gui import main_window as gui_module
+            import tkinter as tk
+            
+            # tkinterdnd2の使用を試行
+            try:
+                from tkinterdnd2 import TkinterDnD
+                root = TkinterDnD.Tk()
+            except ImportError:
+                root = tk.Tk()
+            
+            workspace_path = args.workspace if args.workspace else None
+            app = gui_module.MainWindow(root, workspace_path)
+            root.mainloop()
+        except ImportError as e:
+            print(f"GUIモジュールのインポートエラー: {e}")
+            print("GUI機能を使用するには、必要なライブラリがインストールされていることを確認してください。")
+        except Exception as e:
+            print(f"GUI起動エラー: {e}")
         return
     
     # デモ実行

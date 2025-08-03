@@ -1,8 +1,8 @@
 import os
 import json
 from typing import List, Dict, Any, Optional
-from src.models.preset import Preset
-from src.utils.id_generator import PresetIDGenerator
+from models.preset import Preset
+from utils.id_generator import PresetIDGenerator
 
 
 class PresetManager:
@@ -146,10 +146,3 @@ class PresetManager:
         
         return preset
     
-    def create_preset(self, preset_data: Dict[str, Any]) -> Preset:
-        """プリセットを作成（辞書形式から）"""
-        return self.create_preset_with_id(preset_data)
-    
-    def load_preset(self, name: str) -> Optional[Preset]:
-        """プリセット名でプリセットを読み込み"""
-        return self.get_preset_by_name(name)
